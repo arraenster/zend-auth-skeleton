@@ -1,0 +1,74 @@
+{
+    "name": "arraenster/remote-locks",
+    "description": "Admin panel for managing remote locks",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "mvc",
+        "zf2",
+        "remote",
+        "admin"
+    ],
+    "authors": [
+        {
+            "name": "Vladyslav Semerenko",
+            "email": "vladyslav.semerenko@gmail.com",
+            "role": "developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-servicemanager": "@stable",
+        "zendframework/zend-eventmanager": "@stable",
+        "zendframework/zend-modulemanager": "@stable",
+        "zendframework/zend-developer-tools": "@stable",
+
+        "zendframework/zend-config": "@stable",
+        "zendframework/zend-console": "@stable",
+        "zendframework/zend-test": "@stable",
+        "zendframework/zend-crypt": "@stable",
+        "zendframework/zend-mail": "@stable",
+        "zendframework/zend-text": "@stable",
+        "zendframework/zend-serializer": "@stable",
+        "zendframework/zend-mvc": "@stable",
+        "zendframework/zend-filter": "@stable",
+        "zendframework/zend-db": "@stable",
+        "zendframework/zend-stdlib": "@stable",
+        "zendframework/zend-view": "@stable",
+        "zendframework/zend-form": "@stable",
+        "zendframework/zend-validator": "@stable",
+        "zendframework/zend-i18n": "@stable",
+        "zendframework/zend-log": "@stable",
+        "zendframework/zend-cache": "@stable",
+        "ircmaxell/random-lib": "~1.0",
+        "doctrine/doctrine-orm-module": "0.8.0",
+        "doctrine/orm": "2.5.*@dev"
+    },
+    "require-dev": {
+        "zendframework/zend-developer-tools": "dev-master",
+        "phpunit/phpunit": "4.6",
+        "codeception/codeception": "2.0.9",
+        "flow/jsonpath": "0.2.4",
+        "bjyoungblood/bjy-profiler": ">=1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Application\\": "module/Application/src/",
+            "Auth\\": "module/Application/src/Auth/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/unit/Test/"
+        }
+    },
+    "scripts": {
+        "development-disable": "zf-development-mode disable",
+        "development-enable": "zf-development-mode enable",
+        "development-status": "zf-development-mode status",
+        "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php"
+    }
+}

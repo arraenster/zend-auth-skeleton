@@ -1,0 +1,66 @@
+<?php
+
+$this->headTitle('Main page');
+
+foreach ($this->flashMessenger()->getMessages() as $message) {
+    echo "<span class='label label-success'>" . $message . "</span>";
+}
+
+foreach ($this->flashMessenger()->getErrorMessages() as $message) {
+    echo "<span class='label label-danger'>" . $message . "</span>";
+}
+
+?>
+<div class="row">
+    <div class="col-md-6">
+        <h1><?= $this->escapeHtml('Users') ?></h1>
+        <table class="table">
+            <thead>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Available doors</th>
+            </thead>
+            <tbody>
+
+            <?php foreach ($this->users as $user): ?>
+
+                <tr>
+                    <td><?= $user['id'] ?></td>
+                    <td><?= $user['username'] ?></td>
+                    <td><?= $user['role'] ?></td>
+                    <td></td>
+                </tr>
+
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h1><?= $this->escapeHtml('Doors') ?></h1>
+        <table class="table">
+            <thead>
+            <th>ID</th>
+            <th>Alias</th>
+            <th>Description</th>
+            <th>Status</th>
+            </thead>
+            <tbody>
+
+            <?php foreach ($this->doors as $door): ?>
+
+                <tr>
+                    <td><?= $door['id'] ?></td>
+                    <td><?= $door['alias'] ?></td>
+                    <td><?= $door['description'] ?></td>
+                    <td><?= $door['status'] ?></td>
+                    <td></td>
+                </tr>
+
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<a href='<?= $this->url('user', ['action'=>'add']) ?>'>Add new user</a>
