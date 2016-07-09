@@ -58,6 +58,20 @@ return [
                 ],
 
             ],
+            'guest' => [
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => [
+                    'route'    => '/guest[/:action]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\GuestController::class,
+                        'action'        => 'guest',
+                    ],
+                ],
+
+            ],
         ],
     ],
     'doctrine' => [
@@ -85,6 +99,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            Controller\GuestController::class => InvokableFactory::class,
         ],
     ],
     'form_elements' => array(

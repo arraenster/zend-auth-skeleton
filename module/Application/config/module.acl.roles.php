@@ -6,6 +6,8 @@ return array(
     'guest'=> array(
         'login',
         'logout',
+        'guest',
+        'guest/open',
         'login/process'
     ),
     'admin'=> array(
@@ -13,6 +15,7 @@ return array(
         'login',
         'logout',
         'login/process',
+        'guest',
         'user'
     ),
 );

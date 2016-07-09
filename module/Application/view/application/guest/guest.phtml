@@ -1,0 +1,85 @@
+<div class="jumbotron">
+    <div class="row">
+        <?php
+        foreach ($this->flashMessenger()->getMessages() as $message) {
+            echo "<span class='label label-success'>" . $message . "</span>";
+        }
+
+        foreach ($this->flashMessenger()->getErrorMessages() as $message) {
+            echo "<span class='label label-danger'>" . $message . "</span>";
+        }
+        ?>
+        <div class="col-md-12">
+            <h2>Welcome to LOCK, <?= $this->username ?></h2>
+            <p>Please choose door you want to open. And... open it! </p>
+        </div>
+    </div>
+
+    <h3>Available doors</h3>
+    <form method="POST" action="<?= $this->url('guest', ['action' => 'open']) ?>" name="openDoor">
+        <select id="door" name="door">
+            <option value=""></option>
+            <?php foreach ($this->doors as $door): ?>
+                <option value="<?= $door['id'] ?>"><?= $door['alias'] ?></option>
+            <?php endforeach; ?>
+        </select>
+        <?php
+        if (empty($this->doors)) {
+            $disabled = 'disabled';
+        } else {
+            $disabled = '';
+        }
+
+        ?>
+        <input type="hidden" id="userId" value="<?= $this->userId ?>">
+        <input id="openDoor" type="button" class="btn btn-primary" value="Open" <?= $disabled?>>
+    </form>
+</div>
+<h3>Door Events</h3>
+
+<table class="table">
+    <thead>
+    <th>User</th>
+    <th>Door</th>
+    <th>Time</th>
+    <th>Event</th>
+    <tbody>
+    <?php foreach ($this->logs as $log): ?>
+        <tr>
+            <td><?= $log['username'] ?></td>
+            <td><?= $log['alias'] ?></td>
+            <td><?= $log['logTime']->format('Y-m-d H:i:s') ?></td>
+            <td><?= $log['description'] ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+    </thead>
+</table>
+
+<!--
+ TODO: Add pagination for log table
+-->
+
+<script>
+
+    $("#openDoor").click(function() {
+
+        var request = $.ajax({
+            url: "/guest/open",
+            method: "POST",
+            data: {
+                "doorId": $('#door').val(),
+                "userId": $('#userId').val()
+            }
+        });
+
+        request.done(function(jsondata) {
+            location.reload();
+        });
+
+        request.fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+        });
+    });
+
+</script>

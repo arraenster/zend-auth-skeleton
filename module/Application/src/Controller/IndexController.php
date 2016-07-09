@@ -53,10 +53,10 @@ class IndexController extends AbstractActionController
             }
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'users' => $grouppedUsers,
             'doors' => $this->_getDoors(),
-        ));
+        ]);
     }
 
     /**

@@ -96,6 +96,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
      * Redirect to 403 if current resource is not allowed
      *
      * @param MvcEvent $e
+     * @return Response
      */
     public function checkAcl(MvcEvent $e)
     {
@@ -108,9 +109,16 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
         }
 
         if (!$e->getViewModel()->acl->isAllowed($userRole, $route)) {
+            $router   = $e->getRouter();
+            $url      = $router->assemble(array(), array(
+                'name' => 'guest'
+            ));
+
             $response = $e->getResponse();
-            $response->getHeaders()->addHeaderLine('Location', $e->getRequest()->getBaseUrl() . '/403');
-            $response->setStatusCode(403);
+            $response->getHeaders()->addHeaderLine('Location', $url);
+            $response->setStatusCode(302);
+
+            return $response;
         }
     }
 
@@ -159,6 +167,21 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                     $instance->sm = $locator;
                 }
             )
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Zend\Log' => function($sm) {
+                    $logger = new \Zend\Log\Logger();
+                    $writer = new \Zend\Log\Writer\Stream('./data/log/app.log');
+                    $logger->addWriter($writer);
+
+                    return $logger;
+                },
+            ),
         );
     }
 
