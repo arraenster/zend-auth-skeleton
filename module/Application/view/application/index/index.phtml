@@ -4,6 +4,7 @@ $this->headTitle('Main page');
 
 foreach ($this->flashMessenger()->getMessages() as $message) {
     echo "<span class='label label-success'>" . $message . "</span>";
+    echo "<br />";
 }
 
 foreach ($this->flashMessenger()->getErrorMessages() as $message) {
@@ -20,6 +21,7 @@ foreach ($this->flashMessenger()->getErrorMessages() as $message) {
                 <th>Username</th>
                 <th>Role</th>
                 <th>Available doors</th>
+                <th></th>
             </thead>
             <tbody>
 
@@ -29,7 +31,8 @@ foreach ($this->flashMessenger()->getErrorMessages() as $message) {
                     <td><?= $user['id'] ?></td>
                     <td><?= $user['username'] ?></td>
                     <td><?= $user['role'] ?></td>
-                    <td></td>
+                    <td><?= implode(',', $user['doors']) ?></td>
+                    <td><a href='<?= $this->url('user', ['action'=>'edit', 'id' => $user['id']]) ?>'>Edit permissions</a></td>
                 </tr>
 
             <?php endforeach; ?>
