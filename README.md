@@ -22,17 +22,20 @@ Logs are implemented in two ways:
 
 1. Install all composer dependencies with `composer update`
 2. Put your database connection credentials to `local.php`
-`$dbParams = array(
+```
+$dbParams = array(
      'database'  => 'yourdatabase',
      'username'  => 'youruser',
      'password'  => 'yourpassword',
      'hostname'  => '127.0.0.1',
      // buffer_results - only for mysqli buffered queries, skip for others
      'options' => array('buffer_results' => true)
- );`
+ );
+```
 
 3. For Doctrine create file `doctrine.local.php` with such contents
-`return array(
+```
+return array(
      'doctrine' => array(
          'connection' => array(
              'orm_default' => array(
@@ -47,7 +50,8 @@ Logs are implemented in two ways:
              )
          ),
      ),
- );`
+ );
+```
 
 4. To have working Zend Developer Tools toolbar put file `./vendor/zendframework/zend-developr-tools/config/zenddevelopertools.local.php.dist`
 to './config/autoload/zenddevelopertools.local.php'
@@ -57,7 +61,9 @@ to './config/autoload/zenddevelopertools.local.php'
 - `./vendor/bin/doctrine-module orm:schema-tool:update --force` - will create database tables
 
 6. Put initial admin account into database:
-`insert into users_table (username, password, role) VALUES('admin', '$2y$10$5xDAll5YJtaFzQC6EhoVSeGrjtc708PApPowv4ounlBgmhuEPC.6S', 'admin')`
+```
+insert into users_table (username, password, role) VALUES('admin', '$2y$10$5xDAll5YJtaFzQC6EhoVSeGrjtc708PApPowv4ounlBgmhuEPC.6S', 'admin')
+```
 This will create admin account *admin:admin*
 
 7. Your application is ready to use.
@@ -65,6 +71,9 @@ This will create admin account *admin:admin*
 ## PHPUnit
 
 Tests available at `./tests/unit/Test` directory.
+Currently covered only main IndexController.
+Index action is covered with standard routing.
+For testing adding users created mocked authentication method `mockUserLogin()`.
 
 ## Credits
 

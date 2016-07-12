@@ -9,15 +9,6 @@
  */
 include_once('local.php');
 
-$dbParams = array(
-    'database'  => 'testdatabase',
-    'username'  => 'testuser',
-    'password'  => 'testpassword',
-    'hostname'  => '127.0.0.1',
-    // buffer_results - only for mysqli buffered queries, skip for others
-    'options' => array('buffer_results' => true)
-);
-
 return array(
     'service_manager' => array(
         'factories' => array(
