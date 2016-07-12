@@ -3,6 +3,12 @@
  * Global Configuration Override
  */
 
+/**
+ * include $dbParams = [] from local.php
+ * Put your credentials for profiler in that array
+ */
+include_once('local.php');
+
 $dbParams = array(
     'database'  => 'testdatabase',
     'username'  => 'testuser',
