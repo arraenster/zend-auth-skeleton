@@ -42,4 +42,3 @@ class AuthStorage extends Storage\Session
         $this->session->getManager()->forgetMe();
     }
 }
-

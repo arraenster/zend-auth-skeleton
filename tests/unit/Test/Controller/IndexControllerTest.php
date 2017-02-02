@@ -110,7 +110,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         // fetch content of the page
         $html = $this->getResponse()->getBody();
-;
+        ;
         // parse page content, find the hash value pre-filled to the hidden element
         $dom = new Query($html);
         $csrf = $dom->execute('input[name="security"]')->current()->getAttribute('value');

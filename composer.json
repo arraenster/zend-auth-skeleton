@@ -48,6 +48,12 @@
         "doctrine/orm": "2.5.*@dev"
     },
     "require-dev": {
+        "theseer/phpdox" : "@stable",
+        "sebastian/phpcpd" : "@stable",
+        "squizlabs/php_codesniffer": "2.*",
+        "phpmd/phpmd" : "@stable",
+        "pdepend/pdepend" : "2.5.0",
+        "phploc/phploc": "*",
         "zendframework/zend-developer-tools": "dev-master",
         "phpunit/phpunit": "4.6",
         "codeception/codeception": "2.0.9",

@@ -87,5 +87,4 @@ class DoorsTable extends BaseEntity
         $this->status = $status;
         return $this;
     }
-
 }

@@ -64,7 +64,6 @@ class GuestController extends AbstractActionController
         $logger = $this->sm->get('Zend\Log');
         $request = $this->getRequest();
         if ($request->isPost()) {
-
             $formParams = $request->getPost();
             $doorId = $formParams['doorId'];
             $userId = $formParams['userId'];
@@ -75,8 +74,7 @@ class GuestController extends AbstractActionController
             $logger->log(Logger::INFO, sprintf("Door #%s has been opened by user #%s", $doorId, $userId));
 
             // Database logging
-            $this->_addNewOpenLog($doorId, $userId,  sprintf("Door #%s has been opened by user #%s", $doorId, $userId));
-
+            $this->_addNewOpenLog($doorId, $userId, sprintf("Door #%s has been opened by user #%s", $doorId, $userId));
         } else {
             $logger->log(Logger::ALERT, "Somebody has tried to open door");
         }

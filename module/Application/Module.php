@@ -70,7 +70,6 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
         $roles = include __DIR__ . '/config/module.acl.roles.php';
         $allResources = array();
         foreach ($roles as $role => $resources) {
-
             $role = new \Zend\Permissions\Acl\Role\GenericRole($role);
             $acl->addRole($role);
 
@@ -78,8 +77,9 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 
             //adding resources
             foreach ($resources as $resource) {
-                if(!$acl->hasResource($resource))
+                if (!$acl->hasResource($resource)) {
                     $acl->addResource(new \Zend\Permissions\Acl\Resource\GenericResource($resource));
+                }
             }
             //adding restrictions
             foreach ($allResources as $resource) {
@@ -125,18 +125,19 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
     /**
      * Authenticate user or redirect to log in
      */
-    public function authPreDispatch($e) {
+    public function authPreDispatch($e)
+    {
 
         $auth   = $e->getApplication()->getServiceManager()->get("LocalAuthService");
         $match  = $e->getRouteMatch();
 
         $controller = $match->getParam('controller');
-        if (strstr($controller, "Auth"))
+        if (strstr($controller, "Auth")) {
             return;
+        }
 
         //if already login, redirect to success page
         if (!$auth->hasIdentity()) {
-
             $router   = $e->getRouter();
             $url      = $router->assemble(array(), array(
                 'name' => 'auth'
@@ -174,7 +175,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
     {
         return array(
             'factories' => array(
-                'Zend\Log' => function($sm) {
+                'Zend\Log' => function ($sm) {
                     $logger = new \Zend\Log\Logger();
                     $writer = new \Zend\Log\Writer\Stream('./data/log/app.log');
                     $logger->addWriter($writer);

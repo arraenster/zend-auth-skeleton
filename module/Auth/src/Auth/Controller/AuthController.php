@@ -104,12 +104,11 @@ class AuthController extends AbstractActionController implements AuthServiceAwar
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-
                 $authAdapter =  $this->sm->get('Auth\Model\AuthAdapter');
                 $result = $authAdapter->setCredentials(
                     $request->getPost('username'),
                     $request->getPost('password')
-                    )->authenticate();
+                )->authenticate();
 
                 foreach ($result->getMessages() as $message) {
                     //save message temporary into flashmessenger
@@ -117,7 +116,6 @@ class AuthController extends AbstractActionController implements AuthServiceAwar
                 }
 
                 if ($result->isValid()) {
-
                     $resultRow = $result->getIdentity();
 
                     //check if it has rememberMe :

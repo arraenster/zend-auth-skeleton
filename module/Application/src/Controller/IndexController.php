@@ -42,7 +42,6 @@ class IndexController extends AbstractActionController
 
         $grouppedUsers = [];
         foreach ($users as $user) {
-
             $grouppedUsers[$user['id']]['id'] = $user['id'];
             $grouppedUsers[$user['id']]['username'] = $user['username'];
             $grouppedUsers[$user['id']]['role'] = $user['role'];
@@ -77,7 +76,6 @@ class IndexController extends AbstractActionController
             $form->setData($formParams);
 
             if ($form->isValid()) {
-
                 $objectManager = $this->sm->get('Doctrine\ORM\EntityManager');
                 $newUser = new UsersTable();
 
@@ -118,7 +116,7 @@ class IndexController extends AbstractActionController
             ->select('u.id, u.username, u.role')
             ->from('\Application\Entity\UsersTable', 'u')
             ->where('u.id = :id')
-            ->setParameter(':id',$id)
+            ->setParameter(':id', $id)
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -150,7 +148,6 @@ class IndexController extends AbstractActionController
 
             // Save new permissions
             foreach ($formParams['doorIds'] as $doorId) {
-
                 $newPermission = new PermissionsTable();
                 $newPermission->setDoorId($doorId)->setUserId($formParams['userId']);
                 $newPermission->setId(0);
