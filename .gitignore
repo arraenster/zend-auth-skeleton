@@ -9,5 +9,6 @@ nbproject
 .settings
 vendor
 composer.phar
+composer.lock
 config/development.config.php
 phpunit.xml
